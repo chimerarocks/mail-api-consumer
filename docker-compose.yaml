@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+
+    consumer:
+        build: .
+        container_name: consumer
+        entrypoint: ./.docker/entrypoint.sh
+        ports:
+            - "8080:8080"
+        volumes:
+            - .:/var/www
+        external_links:
+            - mail-api
+        networks:
+            - default
+
+networks:
+    default:
+        external:
+            name: mail-api_app-network
